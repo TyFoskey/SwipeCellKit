@@ -158,8 +158,8 @@ class SwipeController: NSObject {
             } else {
                 let targetOffset = targetCenter(active: swipeable.state.isActive)
                 let distance = targetOffset - actionsContainerView.center.x
-                let normalizedVelocity = velocity.x * scrollRatio / distance
-                
+                var normalizedVelocity = velocity.x * scrollRatio / distance
+                if normalizedVelocity > 5 { normalizedVelocity = 5 }
                 animate(toOffset: targetOffset, withInitialVelocity: normalizedVelocity) { _ in
                     if self.swipeable?.state == .center {
                         self.reset()
